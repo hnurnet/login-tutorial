@@ -13,8 +13,13 @@ export class UserService {
       observe:'body',
       headers:new HttpHeaders().append('content-type','application/json')
     });
-
-
-
   }
+  login(body:any){
+    return this._http.post('http://127.0.0.1:3000/users/login', body, {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('content-type','application/json')
+    }
+  )}
+  
 }

@@ -18,6 +18,30 @@ mongoose.connect('mongodb://127.0.0.1:27017/youtube')
 .then(() => console.log('Connected to database . . .'))
 .catch((erro) => console.log('Refuse to connect ...' + error));
 
+// Passport
+var passport = require('passport');
+var session = require('express-session');
+
+app.use(session({
+  name:'myname.sid',
+  resave:false,
+  saveUninitialized:false,
+  secret:'secret',
+  cookie:{
+    maxAge:36000000,
+    httpOnly:false,
+    secure:false
+  }
+}))
+
+require('./passport.config');
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
+
 
 
 
