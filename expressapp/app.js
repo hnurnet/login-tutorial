@@ -21,6 +21,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/youtube')
 // Passport
 var passport = require('passport');
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
+
+
 
 app.use(session({
   name:'myname.sid',
@@ -31,7 +35,8 @@ app.use(session({
     maxAge:36000000,
     httpOnly:false,
     secure:false
-  }
+  },
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
 require('./passport.config');
